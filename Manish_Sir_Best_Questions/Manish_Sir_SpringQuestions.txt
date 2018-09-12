@@ -1,0 +1,261 @@
+﻿Difference between repository and DAO pattern
+The main difference between a repository and a dao is that a repository returns only objects that are understood by the calling layer. Most of the time the repository is used by the business layer and thus, it returns business objects. A dao returns data which might or might not be a whole business object i.e the data isn't a valid business concept.
+
+Spring ContextLoaderlistener
+
+Difference between setter and constructor injection
+
+Another difference between setter vs constructor injection in Spring and one of the drawback of  setter injection is that it does not ensures dependency Injection. You can not guarantee that certain dependency is injected or not, which means you may have an object with incomplete dependency. On other hand constructor Injection does not allow you to construct object, until your dependencies are ready.
+
+
+4) One more drawback of setter Injection is Security. By using setter injection, you can override certain dependency which is not possible with constructor injection because every time you call the constructor, a new object is gets created.
+
+ Different the bean scopes supported by Spring?
+There are five scoped provided by the Spring Framework supports following five scopes:
+In singleton scope, Spring scopes the bean definition to a single instance per Spring IoC container.
+In prototype scope, a single bean definition has any number of object instances.
+In request scope, a bean is defined to an HTTP request. This scope is valid only in a web-aware Spring ApplicationContext.
+In session scope, a bean definition is scoped to an HTTP session. This scope is also valid only in a web-aware Spring ApplicationContext.
+In global-session scope, a bean definition is scoped to a global HTTP session. This is also a case used in a web-aware Spring ApplicationContext.
+
+Are Singleton beans thread safe in Spring Framework?
+No, singleton beans are not thread-safe in Spring framework.
+
+What are inner beans in Spring?
+When a bean is only used as a property of another bean it can be declared as an inner bean. Spring’s XML-based configuration metadata provides the use of <bean/> element inside the <property/> or <constructor-arg/> elements of a bean definition, in order to define the so-called inner bean. Inner beans are always anonymous and they are always scoped as prototypes.
+
+@Required annotation
+This annotation simply indicates that the affected bean property must be populated at configuration time, through an explicit property value in a bean definition or through autowiring. The container throws BeanInitializationException if the affected bean property has not been populated.
+
+@Autowired annotation
+The @Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished. It can be used to autowire bean on the setter method just like @Required annotation, on the constructor, on a property or pn methods with arbitrary names and/or multiple arguments.
+
+@Qualifier annotation
+When there are more than one beans of the same type and only one is needed to be wired with a property, the @Qualifier annotation is used along with @Autowired annotation to remove the confusion by specifying which exact bean will be wired.
+
+Difference between <context:annotation-config> vs <context:component-scan>?
+
+1) First big difference between both tags is that <context:annotation-config> is used to activate applied annotations in already registered beans in application context. Note that it simply does not matter whether bean was registered by which mechanism e.g. using <context:component-scan> or it was defined in application-context.xml file itself.
+
+2) Second difference is driven from first difference itself. It registers the beans defined in config file into context + it also scans the annotations inside beans and activate them. So <context:component-scan> does what <context:annotation-config> does, but additionally it scan the packages and register the beans in application context.
+
+Differnece between @Inject and @Resource and @AutoWired --by type byname
+TransactionManager configuration in Spring using Hibernate
+load time vs compile time weaving in Aspect
+Spring Actuators
+Inject the prototype bean in singelton scope bean --- lookup-method 
+Creating Completly Singleton bean in spring----factory-metod
+Difference between @Controller and @RestController----only add @responsebody
+SpringSecurity using OAuth2
+Filter required for spring security
+
+What’s difference between managed associations and hibernate associations?
+Managed associations relate to container management persistence and are bi-directional while hibernate associations are unidirectional.
+
+Spring boot @EnableAutoConfiguration
+Spring beanfactory and application context: bean factory is basiscally to use create the bean, but application context also give a ability to destroy the beans created. 
+Bean factory instantiate bean when we call getbean method (lazy loading) but app context loads bean when container starts (aggresive laoding)
+
+Bean factoty post processor and bean post processors 
+bean post processors: Bean post processors are called before and after the property initailized with the bean (i.e. custom init method, @PostConstruct or afterPropertySet method). 
+this can be used to safly initialized properties of a bean initialization
+
+Bean factoty post processor: This will call before the instantiation of a bean. It can be used to change the bean defination at run time.
+
+Configuring Hibernate
+Hibernate ID generation
+hibernate interceptor: It basically intercept the underlying SQL before it goes to the dirver manager to run
+
+What is named SQL query in Hibernate? 	
+Named queries are SQL queries which are defined in mapping document using <sql-query> tag and called using Session.getNamedQuery() method. 
+Named query allows you to refer a particular query by the name you provided, by the way, you can define named query in hibernate either by using annotations or XML mapping file, 
+as I said above. @NameQuery is used to define single named query and @NameQueries is used to define multiple named query in hibernate.
+
+What is the difference between sorted and ordered collection in hibernate?
+A sorted collection is sorted in memory by using Java Comparator while an ordered collection uses database's order by clause for ordering. For large data set it's better to use ordered collection to avoid any OutOfMemoryError in Java, by trying to sort them in memory.
+
+
+What is the difference between save, persist and saveOrUpdate methods in Hibernate?
+After get vs load, this is another Hibernate Interview question which appears quite often. All three methods i.e. save(), saveOrUpdate() and persist() is used to save objects into database, but has subtle differences e.g. save() can only INSERT records but saveOrUpdate() can either INSERT or UPDATE records. Also, the return type of save() is a Serializable object, while return type of persist() method is void. You can also check save vs persist vs saveOrUpdate for complete differences between them in hibernate.
+
+What does Session lock() method do in Hibernate? what is difference between Session's lock() and update() method.
+This one is one of the tricky Hibernate Interview questions because Session's lock() method reattach object without synchronizing or updating with the database. So you need to be very careful while using lock() method. By the way, you can always use Session's update() method to sync with the database during reattachment.
+
+What is query cache in Hibernate?
+This question Sometimes asked as a follow-up of last Hibernate Interview question, QueryCache actually stores the result of SQL query for future calls. Query cache can be used along with second level cache for improved performance. Hibernate support various open source caching solution to implement Query cache e.g. EhCache.
+
+Why it's important to provide no argument constructor in Hibernate Entities? Why we get "InstantiationException" in hibernate
+Every Hibernate Entity class must contain a no argument constructor, because Hibernate framework creates an instance of them using Reflection API, by calling Class.newInstance() method. This method will throw InstantiationException if it doesn't found any argument constructor inside Entity class.
+
+
+
+hibernate transaction: it is a bridge between hibernate session and jta transaction
+One session factory has only one interceptor configured.
+Spring boot: 
+
+Spring factroy method vs dependency injection
+
+Difference between class.forName() and loadClass()
+
+Class.forName():
+
+By default the classes are initialized at the time of loading. It means that static variables in the classes are initialized.
+Also the class is loaded from the current class loader. When you invoke the Class.forName for loading the JDBC driver class, it is loaded to the same class loader from where it is invoked. In short, it is loaded to the caller’s class loader.
+Class.forName is overloaded method. Invoking with single string parameter is equivalent of Class.forName(className, true, currentLoader). Optionally you can pass the second and third parameters to change the behavior.
+className – Fully qualified name of the class to be loaded
+initialize – Whether to initialize the class or not. By default the value is “true”
+classLoader – By default the value is current class loader. Optionally you can change the class loader name.
+
+ClassLoader.loadClass():
+
+By default, the classes are not initialized. The classes are loaded and made available in the classpath, the variables are initialized only when it is first time invoked by the caller.
+Another advantage of this class is that you can load the classes to any specific class loader. Which may or may not be the loader that loads that calling code. If picking a specific loader to load the class is important to your design, you should ClassLoader.loadClass().
+
+document generation Swagger
+@Before and @BeforeClass in Junit
+ExecutorService
+
+difference between cyclic barrier and count down latch
+
+Class level locking  vs Object level locking -- preventing static resource and preventing instance resource
+
+Functional Interface method is concrete or non-concrete - concrete
+
+which map implemetaion class  (preserv insertion order) - LinkedHashMap
+
+How you write thread-safe Singleton in Java without double checking and lazy loading.
+Lazy loading and eager loading in singelton
+How many ways are there to create a singleton
+
+You have a employee class and a list of employee objects. I want to get the object from this list without iterating this. You are free to make any changes
+How you do it?
+
+Failsafe vs fail-fast
+
+Can Enum extend a class in Java? 
+(No, because Java allows a class to only extend one class and enum by default extends java.lang.Enum,
+
+
+
+Difference between cross join and full outer join
+
+Difference between weakhashmap and hashmap
+
+Can we make an array volatile?
+This is one of the tricky Java multi-threading questions you will see in senior Java developer Interview. Yes, you can make an array volatile in Java but only the reference which is pointing to an array, not the whole array. What I mean, if one thread changes the reference variable to points to another array, that will provide a volatile guarantee, but if multiple threads are changing individual array elements they won't be having happens before guarantee provided by the volatile modifier.
+
+Can volatile make a non-atomic operation to atomic?
+This another good question I love to ask on volatile, mostly as a follow-up of the previous question. This question is also not easy to answer because volatile is not about atomicity, but there are cases where you can use a volatile variable to make the operation atomic.
+
+
+The difference between Serializable and Externalizable in Java? (answer)
+ Serializable interface is used to make Java classes serializable so that they can be transferred over network or their state can be saved on disk, but it leverages default serialization built-in JVM, which is expensive, fragile and not secure. Externalizable allows you to fully control the Serialization process, specify a custom binary format and add more security measure.
+
+ 
+
+Weak Reference :
+
+A weak reference, simply put, is a reference that isn't strong enough to force an object to remain in memory. Weak references allow you to leverage the garbage collector's ability to determine reachability for you, so you don't have to do it yourself.
+
+Soft Reference :
+
+A soft reference is exactly like a weak reference, except that it is less eager to throw away the object to which it refers. An object which is only weakly reachable (the strongest references to it are WeakReferences) will be discarded at the next garbage collection cycle, but an object which is softly reachable will generally stick around for a while.
+
+Phantom Reference :
+
+A phantom reference is quite different than either SoftReference or WeakReference. Its grip on its object is so tenuous that you can't even retrieve the object -- its get() method always returns null. The only use for such a reference is keeping track of when it gets enqueued into a ReferenceQueue, as at that point you know the object to which it pointed is dead.
+
+
+Binary semaphore and counting semaphore
+
+
+Q25. What are the drawbacks of using singletion design pattern?
+A. The following drawbacks of Singleton pattern must be considered before applying it to any solution: - it introduces global state into an application and thus it makes unit testing far more difficult -access to the singleton in a multi-threaded context must be serialized
+
+Q30. What is prototype pattern?
+A. Prototype simply means making a clone and it is used to cloning an object to avoid its creation. Java provides an interface called Cloneable whose method clone() is used to clone an object.
+
+
+Advantage of Observer Design Pattern in Java: 
+Main advantage is loose coupling between objects called observer and observable. The subject only know the list of observers it don’t care about how they have their implementation.All the observers are notified by subject in a single event call as Broadcast communication
+
+
+Disadvantage of Observer Design Pattern in Java: 
+
+The disadvantage is that the sometime if any problem comes, debugging becomes very difficult because flow of control is implicitly between observers and observable we can predict that now observer is going to fire and if there is chain between observers then debugging become more complex.
+Another issue is Memory management because subject will hold all the reference of all the observers if we not unregister the object it can create the memory issue.
+
+What is a compile time constant in Java? What is the risk of using it?
+public static final variables are also known as a compile time constant, the public is optional there. They are replaced with actual values at compile time because compiler know their value up-front and also knows that it cannot be changed during run-time. One of the problem with this is that if you happened to use a public static final variable from some in-house or third party library and their value changed later than your client will still be using old value even after you deploy a new version of JARs. To avoid that, make sure you compile your program when you upgrade dependency JAR files.
+
+The difference between LinkedHashMap and PriorityQueue in Java? (answer)
+PriorityQueue guarantees that lowest or highest priority element always remain at the head of the queue, but LinkedHashMap maintains the order on which elements are inserted. When you iterate over a PriorityQueue, iterator doesn't guarantee any order but iterator of LinkedHashMap does guarantee the order on which elements are inserted.
+
+How HashSet works internally in Java? (answer)
+HashSet is internally implemented using an HashMap. Since a Map needs key and value, a default value is used for all keys. Similar to HashMap, HashSet doesn't allow duplicate keys and only one null key, I mean you can only store one null object in HashSet.
+
+Which one is better constructor injection or setter dependency injection? (answer)
+Each has their own advantage and disadvantage. Constructor injection guaranteed that class will be initialized with all its dependency, but setter injection provides flexibility to set an optional dependency. Setter injection is also more readable if you are using an XML file to describe dependency. Rule of thumb is to use constructor injection for mandatory dependency and use setter injection for optional dependency.
+
+
+
+Ans. Exception Handling Throw mechanism.
+
+
+linux machine password:asdf	
+
+
+
+How to reload my changes on Spring Boot without having to restart server?
+A: This can be achieved using DEV Tools. With this dependency any changes you save, the embedded tomcat will restart. Spring Boot has a Developer tools (DevTools) module which helps to improve the productivity of developers. One of the key challenge for the Java developers is to auto deploy the file changes to server and auto restart the server. Developers can reload changes on Spring Boot without having to restart my server. This will eliminates the need for manually deploying the changes every time. Spring Boot doesn’t have this feature when it has released it’s first version. This was a most requested features for the developers. The module DevTools does exactly what is needed for the developers. This module will be disabled in the production environment. It also provides H2-database console for better testing the application. The following dependency is used
+			<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+			</dependency> 
+
+What is Actuator in Spring Boot?
+A: Spring boot actuator is one of the important feature in spring boot framework. Spring boot actuator helps you to access the current state of the running application in production environment. There are several metrics that has to be checked and monitored in the production environment. Even some external applications may be using those services to trigger the alert message to concerned person. Actuator module exposes set of REST endpoints that can be directly accessed as a HTTP URL to check the status.
+
+How to run Spring boot application to custom port ?
+A: In order to run a spring boot application on a custom port you can specify the port in application.properties.
+server.port=8090 
+
+Which annotation we would use to write unit test cases in spring boot ?
+A: Spring Boot provides the @SpringBootTest for writing Unit Test Cases
+
+
+CORS support
+Cross-origin resource sharing (CORS) is a W3C specification that allows you to specify in a flexible way what kind of cross domain requests are authorized. Actuator’s MVC endpoints can be configured to support such scenarios.
+
+CORS support is disabled by default and is only enabled once the endpoints.cors.allowed-origins property has been set. The configuration below permits GET and POST calls from the example.com domain:
+
+endpoints.cors.allowed-origins=http://example.com
+endpoints.cors.allowed-methods=GET,POST
+
+
+MAVEN
+what is the mean of "provided" in scope tag while defining the dependencies?
+It means that do not package these dependencies jar, it will be provided by the system. it helps us to keep the size of our package smaller.
+
+What is “Transitively Dependency Resolution Management”?
+
+“Transitively Dependency Resolution Management” means: If we define a “A” dependency in build scripts, “A” is dependent on “B” and “B” is dependent on “C”, That means “A” is also dependent on “C”.
+Then Build Tools will download and add all Three Jar files “A”, “B” and “C” to our application classpath.
+
+
+In Maven what are the two setting files called and what are their location?
+
+In Maven, the setting files are called settings.xml, and the two setting files are located at
+
+• Maven installation directory: $M2_Home/conf/settings.xml
+• User’s home directory: ${ user.home }/ .m2 / settings.xml
+
+Explain what would the “jar: jar” goal do?
+
+jar: jar will not recompile sources; it will imply just create a JAR from the target/classes directory considering that everything else has been done
+
+Have you ever had problem getting your projects in eclipse refreshed after you made changes in the Pom files ?
+
+Ans. Yes, It happens many times but I would usually perform mvn eclipse:eclipse and this would resolve the project refresh problems.
+

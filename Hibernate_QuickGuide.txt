@@ -1,0 +1,40 @@
+
+
+
+
+@Entity
+@Table
+@GeneratedValue
+@Id
+@ManyToMany(cascade = CascadeType.ALL)
+@ManyToOne(cascade = CascadeType.ALL)
+@JoinColumn(name="addressId")
+@OneToMany(cascade = CascadeType.ALL) 
+------------
+Inheritence :
+------------
+@DiscriminatorValue
+@DiscriminatorColumn
+@Inheritance
+
+------------
+Association :
+------------
+@Embedded
+@Embeddable
+
+---------------
+Need to Study :->
+---------------
+Propogation Level 
+Isolation Level
+Concurrency strategies
+Two person try to update the same person.
+
+
+get vs load
+save vs saveOrUpdate vs persist vs merge
+3 state persistent, transient and detached
+Association
+inherirence
+
